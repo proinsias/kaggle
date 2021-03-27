@@ -1,1 +1,8 @@
 jupyter
+matplotlib
+numpy
+pandas
+pandas_profiling
+scikit-learn
+seaborn
+xgboost
