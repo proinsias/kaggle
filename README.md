@@ -8,5 +8,5 @@ competitions.
   <a href="./LICENSE">
     <img alt="LICENSE" src="https://img.shields.io/badge/license-Unlicence-blue.svg?maxAge=43200">
   </a>
-  <img src="https://github.com/proinsias/proinsias/workflows/code-quality/badge.svg"/>
+  <img src="https://github.com/proinsias/kaggle/workflows/code-quality/badge.svg"/>
 </div>
