@@ -10,3 +10,9 @@ competitions.
   </a>
   <img src="https://github.com/proinsias/kaggle/workflows/Code%20Quality/badge.svg"/>
 </div>
+
+# Competitions
+
+* Tabular Playground Series - Mar 2021
+    * [Kaggle Page](https://www.kaggle.com/c/tabular-playground-series-mar-2021/overview)
+    * [Solution](Tabular%20Playground%20Series%20-%20Mar%202021/README.md)
