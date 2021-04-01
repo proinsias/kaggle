@@ -1,10 +1,13 @@
 ipyparallel
 jupyter
 matplotlib
+neptune-client
+neptune-notebooks
 numpy
 pandas
 pandas_profiling
 ppscore
+psutil
 scikit-learn
 seaborn
 xgboost
