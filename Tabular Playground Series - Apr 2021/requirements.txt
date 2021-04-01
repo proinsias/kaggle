@@ -1,0 +1,11 @@
+ipyparallel
+jupyter
+matplotlib
+numpy
+pandas
+pandas_profiling
+ppscore
+scikit-learn
+seaborn
+xgboost
+
