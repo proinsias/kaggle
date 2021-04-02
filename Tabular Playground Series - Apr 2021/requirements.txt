@@ -1,11 +1,12 @@
 ipyparallel
 jupyter
-matplotlib
+matplotlib==3.2.0
 neptune-client
 neptune-notebooks
 numpy
 pandas
 pandas_profiling
+plotly==4.12.0
 ppscore
 psutil
 scikit-learn

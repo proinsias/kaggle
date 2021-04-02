@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-# In[50]:
+# In[211]:
 import uuid
 from pathlib import Path
 import pandas_profiling
@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import neptune.new as neptune
+import neptune.new.types
 import seaborn as sns
 import sklearn.ensemble
 import sklearn.metrics
@@ -55,7 +56,6 @@ display(submission.head())
 # # Balance of target
 # In[20]:
 train['Survived'].value_counts(normalize=True)
-# Pretty balanced.
 # # EDA
 # In[22]:
 # profile = pandas_profiling.ProfileReport(train, explorative=True)
@@ -241,66 +241,40 @@ def getXgb():
         random_state=0,
         use_label_encoder=False,
     )
-# In[196]:
+# In[217]:
 get_ipython().run_cell_magic('time', '', 'clf = getXgb()\nclf.fit(X_train, y_train)')
+# In[226]:
+params = clf.get_params()
+params['missing'] = 0
+run['parameters'] = params
 # In[200]:
 y_proba = clf.predict_proba(X_test)[:, 1]
 y_pred = clf.predict(X_test)
-# In[201]:
-score = sklearn.metrics.accuracy_score(y_test, y_pred)
-print(f'{score:0.5f} v 0.77372 reference value')
+# In[214]:
+accuracy = sklearn.metrics.accuracy_score(y_test, y_pred)
+print(f'{accuracy:0.5f} v 0.77372 reference value')
+# In[216]:
+run['X_test/accuracy'].log(accuracy)
+run['X_test/average_precision'].log(sklearn.metrics.average_precision_score(y_test, y_proba))
+run['X_test/balanced_accuracy'].log(sklearn.metrics.balanced_accuracy_score(y_test, y_pred))
+run['X_test/f1'].log(sklearn.metrics.f1_score(y_test, y_pred))
+run['X_test/precision'].log(sklearn.metrics.precision_score(y_test, y_pred))
+run['X_test/recall'].log(sklearn.metrics.recall_score(y_test, y_pred))
+run['X_test/roc_auc'].log(sklearn.metrics.roc_auc_score(y_test, y_proba))
 # ## Let's take a look at how the model predicted the various classes
-# In[202]:
+# In[212]:
 # The graph below shows that the model does well with most of the negative observations, but struggles with many of the positive observations.
-plt.figure(figsize=(8,4))
+fig = plt.figure(figsize=(8,4));
 plt.hist(y_proba[np.where(y_test == 0)], bins=100, alpha=0.75, label='neg class')
 plt.hist(y_proba[np.where(y_test == 1)], bins=100, alpha=0.75, label='pos class')
 plt.legend()
 plt.show()
+run['visuals/pos_neg_class'] = neptune.new.types.File.as_html(fig)
 # # Train it on all the data and create submission
-# In[204]:
-get_ipython().run_cell_magic('time', '', "clf = getXgb()\nclf.fit(train_enc, target)\nsubmission['Survived'] = clf.predict(test_enc)\nfilename = f'submission_{run_id}.csv'\nsubmission.to_csv(input_path / filename)\nfilename")
+# In[223]:
+get_ipython().run_cell_magic('time', '', "clf2 = getXgb()\nclf2.fit(train_enc, target)\nsubmission['Survived'] = clf2.predict(test_enc)\nfilename = f'submission_{run_id}.csv'\nsubmission.to_csv(input_path / filename)\nfilename")
+# In[227]:
+params = clf2.get_params()
+params['missing'] = 0
+run['parameters'] = params
 # In[ ]:
-# In[ ]:
-# run["train/accuracy"].log(acc)
-# run["train/loss"].log(loss)
-# run['metric'].log(metric)
-    
-# # single value
-# run['some/structure'] = val
-# # for series of values
-# for val in vals:
-#     run['some/structure'].log(val)
-# In[ ]:
-# run['parameters/activation'] = ACTIVATION
-# PARAMS = {'epoch_nr': 5,
-#           'batch_size': 32,
-#           'dense': 512,
-#           'optimizer': 'sgd',
-#           'metrics': ['accuracy', 'binary_accuracy'],
-#           'activation': 'relu'}
-# run['parameters'] = PARAMS
-# In[ ]:
-# # Log figure to run
-# run['matplotlib-fig'].upload(fig)
-# run['train/distribution'].log(plt_fig)
-# # Log Matplotlib figure (matplotlib.figure.Figure) or plotly figure as an interactive chart,
-# # by using neptune.types.File.as_html().
-# # This option is tested with matplotlib==3.2.0 and plotly==4.12.0.
-# # Make sure that you have correct versions installed. See: plotly installation guide.
-# from neptune.new.types import File
-# run['visuals/matplotlib-fig'] = File.as_html(fig)
-# In[ ]:
-# # Log single String
-# run['aux/text'] = 'text I keep track of, like query or tokenized word'
-# # Log series of String to one log
-# for epoch in range(epochs_nr):
-#     token = str(...)
-#     run['train/tokens'].log(token)
-# In[ ]:
-# # Log file
-# run['aux/data'].upload('auxiliary-data.zip')
-# # Save multiple files under a path
-# run["config_files"].upload_files([path_to_config_1, path_to_config_2])
-# # You can also use wildcard patterns ("glob") with .upload_files()
-# run["preprocessing_scripts"].upload_files("./preprocessing/*.py")
