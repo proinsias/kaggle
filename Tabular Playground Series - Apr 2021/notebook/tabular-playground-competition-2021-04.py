@@ -21,8 +21,6 @@ run_id = uuid.uuid4()
 # In[ ]:
 # Include source files.
 # source_files=["model.py", "prep_data.py"]
-# In[9]:
-os.environ['NEPTUNE_API_TOKEN'], os.environ['NEPTUNE_PROJECT']
 # In[10]:
 run = neptune.init(
     name=f'run_{run_id}',
