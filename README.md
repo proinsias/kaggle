@@ -8,7 +8,6 @@ competitions.
 [![Cron Jobs](https://github.com/proinsias/kaggle/workflows/Cron%20Jobs/badge.svg)](https://github.com/proinsias/kaggle/actions/workflows/cronjobs.yml)
 [![Pull Requests & Pushes](https://github.com/proinsias/kaggle/workflows/Pull%20Requests%20%26%20Pushes/badge.svg)](https://github.com/proinsias/kaggle/actions/workflows/pull-requests-and-pushes.yml)
 [![Mergify Status][mergify-status]][mergify]
-[![Known Vulnerabilities](https://snyk.io/test/github/proinsias/kaggle/badge.svg?targetFile=Gemfile.lock)](https://snyk.io/test/github/proinsias/kaggle?targetFile=Gemfile.lock)
 
 # Competitions
 
