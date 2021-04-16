@@ -5,8 +5,8 @@ pull_request_rules:
       - base=main
       - label!=work-in-progress
       - check-success=analyse
-      - check-success=ansible-lint
       - check-success=github-actions
+      - check-success=Scan-Build
     actions:
       merge:
         method: merge
@@ -15,8 +15,8 @@ pull_request_rules:
     conditions:
       - author~=^dependabot(|-preview)\[bot\]$
       - check-success=analyse
-      - check-success=ansible-lint
       - check-success=github-actions
+      - check-success=Scan-Build
     actions:
       merge:
         method: merge
@@ -33,8 +33,8 @@ pull_request_rules:
       - title~=^\[requires.io\]
       - head~=^requires-io
       - check-success=analyse
-      - check-success=ansible-lint
       - check-success=github-actions
+      - check-success=Scan-Build
     actions:
       merge:
         method: merge
@@ -42,8 +42,8 @@ pull_request_rules:
     conditions:
       - author=pyup-bot
       - check-success=analyse
-      - check-success=ansible-lint
       - check-success=github-actions
+      - check-success=Scan-Build
     actions:
       merge:
         method: merge
