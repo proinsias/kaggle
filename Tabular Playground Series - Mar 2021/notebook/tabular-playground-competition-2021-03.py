@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# coding: utf-8
+# -*- coding: utf-8 -*-
 # In[46]:
 import os
 import uuid
@@ -22,7 +22,7 @@ np.set_printoptions(suppress=True)  # Print floating point numbers using fixed p
 # https://pandas.pydata.org/pandas-docs/stable/user_guide/options.html
 # Print out the full DataFrame repr for wide DataFrames across multiple lines.
 pd.set_option('display.expand_frame_repr', True)
-pd.set_option('display.max_columns', 500)  # Set to None for unlimited number of output rows.  
+pd.set_option('display.max_columns', 500)  # Set to None for unlimited number of output rows.
 pd.set_option('display.max_colwidth', None)
 pd.set_option('display.max_info_columns', 500)
 pd.set_option('display.max_rows', 500)  # Set to None for unlimited number of output rows.
@@ -49,7 +49,7 @@ train['target'].value_counts(normalize=True)
 # In[14]:
 # profile.to_notebook_iframe()
 # Observations:
-# 
+#
 # * No missing cells, duplicate rows, or outliers.
 # * cat5, cat7, cat8, cat10 have high cardinality
 # * cat1, cat2, cat3, cat5, cat6, cat9 have medium cardinality
@@ -91,10 +91,10 @@ cont_vars
 #     )
 # )
 # Observations:
-# 
+#
 # * Cont1 and Cont2 are highly dependent on each other! Better to remove one of them, or take the difference between them as a feature.
 # * Cont0 and Cont10 are also highly dependent on each other, as are count7 and count10.
-# 
+#
 # ## EDA of Categorical Variables
 # In[19]:
 cat_vars = [c for c in train.columns if c.startswith('cat')]
@@ -121,8 +121,8 @@ def subtractCorrelated(df):
                 'cont2',
                 'cont10',
                 'cont7',
-                'cont8'
-            ]
+                'cont8',
+            ],
         )
     )
     return df
@@ -165,7 +165,7 @@ def manuallyHandleCategorical(df):
     df.loc[~mask, 'cat17'] = 'D'  # Replace others with mode.
     mask = df['cat18'].isin(['B', 'D'])
     df.loc[~mask, 'cat18'] = 'D'  # Replace others with mode.
-    
+
     # cat1, cat2, cat3, cat5, cat6, cat9 have medium cardinality
     col = 'cat1'
     s = ['I', 'F', 'K', 'L', 'H']
@@ -198,17 +198,17 @@ def manuallyHandleCategorical(df):
     mask = df[col].isin(s)
     df.loc[~mask, col] = mode  # Replace others with mode.
     col = 'cat7'
-    s = ['AH', 'E', 'AS', 'J', 'AN', 'U',]
+    s = ['AH', 'E', 'AS', 'J', 'AN', 'U']
     mode = 'AH'
     mask = df[col].isin(s)
     df.loc[~mask, col] = mode  # Replace others with mode.
     col = 'cat8'
-    s = ['BM', 'AE', 'AX', 'Y', 'H',]
+    s = ['BM', 'AE', 'AX', 'Y', 'H']
     mode = 'BM'
     mask = df[col].isin(s)
     df.loc[~mask, col] = mode  # Replace others with mode.
     col = 'cat10'
-    s = ['DJ', 'HK', 'DP', 'GS',]
+    s = ['DJ', 'HK', 'DP', 'GS']
     mode = 'DJ'
     mask = df[col].isin(s)
     df.loc[~mask, col] = mode  # Replace others with mode.
@@ -264,13 +264,13 @@ def getRsXgb():
         'colsample_bytree': [0.6, 0.8, 1.0],
         'max_depth': [4, 6, 8],
     }
-    
+
     clf = xgb.XGBClassifier(
         n_jobs=-1,
         random_state=0,
         use_label_encoder=False,
     )
-    
+
     return RandomizedSearchCV(  # FIXME: Try new one?
         clf,
         param_distributions=params,
@@ -282,7 +282,7 @@ def getRsXgb():
 # In[41]:
 get_ipython().run_cell_magic('time', '', "# clf = getRFC()\nclf = getRsXgb()\nclf.fit(X_train_enc, y_train)\ny_pred = clf.predict_proba(X_test_enc)[:, 1] # This grabs the positive class prediction\nscore = roc_auc_score(y_test, y_pred)\nprint(f'{score:0.5f} v 0.88962 reference value')  # New value ?!")
 # ## Let's take a look at how the model predicted the various classes
-# 
+#
 # The graph below shows that the model does well with most of the negative observations, but struggles with many of the positive observations.
 # In[42]:
 plt.figure(figsize=(8,4))

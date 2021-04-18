@@ -11,13 +11,11 @@ competitions.
 [![ShiftLeft Scan](https://github.com/proinsias/kaggle/workflows/ShiftLeft%20Scan/badge.svg)](https://github.com/proinsias/kaggle/actions/workflows/shiftleft-analysis.yml)
 [![Mergify Status][mergify-status]][mergify]
 
-
-
 # Competitions
 
-* Tabular Playground Series - Mar 2021
-    * [Kaggle Page](https://www.kaggle.com/c/tabular-playground-series-mar-2021/overview)
-    * [Solution](Tabular%20Playground%20Series%20-%20Mar%202021/README.md)
+- Tabular Playground Series - Mar 2021
+  - [Kaggle Page](https://www.kaggle.com/c/tabular-playground-series-mar-2021/overview)
+  - [Solution](Tabular%20Playground%20Series%20-%20Mar%202021/README.md)
 
 [mergify]: https://mergify.io
 [mergify-status]: https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/proinsias/kaggle&style=flat

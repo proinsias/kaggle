@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# coding: utf-8
+# -*- coding: utf-8 -*-
 # In[211]:
 import uuid
 from pathlib import Path
@@ -32,7 +32,7 @@ np.set_printoptions(suppress=True)  # Print floating point numbers using fixed p
 # https://pandas.pydata.org/pandas-docs/stable/user_guide/options.html
 # Print out the full DataFrame repr for wide DataFrames across multiple lines.
 pd.set_option('display.expand_frame_repr', True)
-pd.set_option('display.max_columns', 500)  # Set to None for unlimited number of output rows.  
+pd.set_option('display.max_columns', 500)  # Set to None for unlimited number of output rows.
 pd.set_option('display.max_colwidth', None)
 pd.set_option('display.max_info_columns', 500)
 pd.set_option('display.max_rows', 500)  # Set to None for unlimited number of output rows.
@@ -111,20 +111,20 @@ for cat_var in cat_vars:
     train[cat_var] = train[cat_var].astype('category')
 # In[35]:
 for cat_var in cat_vars:
-    sns.catplot(x=cat_var, y='Survived', data=train, kind='bar',);
+    sns.catplot(x=cat_var, y='Survived', data=train, kind='bar');
     plt.show();
 # # Transformations
 # In[149]:
 def transform_vars(df, median_values):
     # Missing data
-    for col in ['Age', 'Fare']:    
+    for col in ['Age', 'Fare']:
         mask = df[col].isnull()
         df.loc[mask, col] = median_values[col]
     # New variables
-    
+
     mask = (df['Age'] >= 18)
     df['isAdult'] = mask.astype(int)
-    
+
     mask = (df['SibSp'] > 0)
     df['hasSibSp'] = mask.astype(int)
     mask = (df['Parch'] > 0)
@@ -132,7 +132,7 @@ def transform_vars(df, median_values):
     mask = (df['Parch'] == 0)
     mask &= (df['Age'] < 18)
     df['hasNanny'] = mask.astype(int)
-    
+
     mask = (df['Sex'] == 'female')
     df['isFemale'] = mask.astype(int)
     mask = df['Cabin'].isnull()
@@ -141,7 +141,7 @@ def transform_vars(df, median_values):
     df.loc[~mask, 'Cabin_Thous'] = (df.loc[df['Cabin'].notnull(), 'Cabin'].str.slice(1).astype(int) / 1000).astype(int)
     df.loc[mask, 'Cabin_Thous'] = -1
     df['Cabin_Thous'] = df['Cabin_Thous'].astype(int)
-    
+
     df = (
         df
         .drop(
@@ -153,7 +153,7 @@ def transform_vars(df, median_values):
             ],
         )
     )
-    
+
     return df
 # In[135]:
 train.shape, test.shape
@@ -163,7 +163,7 @@ median_values = (
         [
             train,
             test,
-        ]
+        ],
     )
     [['Age', 'Fare']]
     .median()
@@ -177,7 +177,7 @@ train_trans.shape, test_trans.shape
 # In[163]:
 def encode_variables(df, enc):
     cols = ['Embarked', 'Cabin_Letter']
-    
+
     df = (
         pd.concat(
             [
@@ -187,12 +187,12 @@ def encode_variables(df, enc):
                 pd.DataFrame(
                     data=enc.transform(df[cols]),
                     index=df.index,
-                )
+                ),
             ],
             axis='columns',
         )
     )
-    
+
     return df
 # In[164]:
 enc = sklearn.preprocessing.OneHotEncoder(sparse=False)
@@ -201,8 +201,8 @@ enc.fit(
         [
             train_trans[['Embarked', 'Cabin_Letter']],
             test_trans[['Embarked', 'Cabin_Letter']],
-        ]
-    )
+        ],
+    ),
 )
 # In[187]:
 train_enc = encode_variables(train_trans, enc)
