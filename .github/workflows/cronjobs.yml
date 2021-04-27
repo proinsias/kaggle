@@ -22,6 +22,12 @@ jobs:
 
       - uses: browniebroke/pre-commit-autoupdate-action@v1.0.0
 
+      - name: Install shfmt
+        run: |
+          sudo apt update
+          sudo apt install snapd
+          sudo snap install shfmt
+
       - uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
