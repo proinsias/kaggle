@@ -1,0 +1,6 @@
+---
+
+ignore-failures:
+
+    python:
+        - jupyter
