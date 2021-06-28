@@ -6,7 +6,7 @@ neptune-notebooks
 numpy
 pandas
 pandas_profiling
-plotly==4.14.3
+plotly==5.0.0
 ppscore
 psutil
 scikit-learn
