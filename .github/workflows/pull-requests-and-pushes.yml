@@ -32,7 +32,7 @@ jobs:
           level: warning
 
       - name: Detect Secrets
-        uses: reviewdog/action-detect-secrets@v0.5
+        uses: reviewdog/action-detect-secrets@v0.6
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
