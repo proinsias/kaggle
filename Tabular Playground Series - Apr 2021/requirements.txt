@@ -1,6 +1,6 @@
 ipyparallel
 jupyter
-matplotlib==3.4.2
+matplotlib==3.4.3
 neptune-client
 neptune-notebooks
 numpy
