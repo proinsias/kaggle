@@ -4,13 +4,13 @@ pull_request_rules:
     conditions:
       - base=main
       - author~=github-actions
-      - check-success-or-neutral=Analyse (pull_request)
-      - check-success-or-neutral=Check code quality (pull_request)
+      - check-success-or-neutral=Analyse
+      - check-success-or-neutral=Check code quality
       - check-success-or-neutral=CodeQL
       - check-success-or-neutral=Deadpendency Check
-      - check-success-or-neutral=GitHub Actions (pull_request)
+      - check-success-or-neutral=GitHub Actions
       - check-success-or-neutral=Python Source Analyzer
-      - check-success-or-neutral=Scan-Build (pull_request)
+      - check-success-or-neutral=Scan-Build
       - check-success-or-neutral=Security Audit for Infrastructure
     actions:
       merge:
@@ -20,13 +20,13 @@ pull_request_rules:
     conditions:
       - base=main
       - author~=dependabot
-      - check-success-or-neutral=Analyse (pull_request)
-      - check-success-or-neutral=Check code quality (pull_request)
+      - check-success-or-neutral=Analyse
+      - check-success-or-neutral=Check code quality
       - check-success-or-neutral=CodeQL
       - check-success-or-neutral=Deadpendency Check
-      - check-success-or-neutral=GitHub Actions (pull_request)
+      - check-success-or-neutral=GitHub Actions
       - check-success-or-neutral=Python Source Analyzer
-      - check-success-or-neutral=Scan-Build (pull_request)
+      - check-success-or-neutral=Scan-Build
       - check-success-or-neutral=Security Audit for Infrastructure
     actions:
       merge:
